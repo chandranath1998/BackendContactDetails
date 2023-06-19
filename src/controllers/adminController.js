@@ -36,6 +36,7 @@ exports.createAdmin = async (req,res) =>{
               Error: "INVALID password - Password should be in this format 1 lower case, 1 upper case, 1 special, 1 number with minimum 8 characters ",
             });
         }
+        // hashing the password
         data.password = await bcrypt.hash(password, 10);
         // making email to lowercase
         email = email.toLowerCase();
@@ -57,12 +58,19 @@ exports.getContactDetails  = async (req,res) => {
         .status(400)
         .send({ status: false, Error: "user's all data is mandatory"});
     }
-
-    let adminCheck = await adminModel.findOne({email:email,password:password})
+     // check email
+    let adminCheck = await adminModel.findOne({email:email})
     if(!adminCheck){return res.status(404).send({status:false, Error:"Wrong email or password" })}
+
+    // password check
+    let passCheck = await bcrypt.compare(password, user.password);
+    if(!passCheck){
+        return res.status(400).send({status : false, message : "Wrong email or password"})
+    }
    
-   
-   if(adminCheck){
+   if(adminCheck && passCheck){
+
+    // given data to the user
      let contactData = await contactModel.find()
      if(contactData.length==0){return res.status(404).send({status:false, message:"No data found"})}
 
