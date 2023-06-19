@@ -63,7 +63,7 @@ exports.getContactDetails  = async (req,res) => {
     if(!adminCheck){return res.status(404).send({status:false, Error:"Wrong email or password" })}
 
     // password check
-    let passCheck = await bcrypt.compare(password, data.password);
+    let passCheck = await bcrypt.compare(password, adminCheck.password);
     if(!passCheck){
         return res.status(400).send({status : false, message : "Wrong email or password"})
     }
