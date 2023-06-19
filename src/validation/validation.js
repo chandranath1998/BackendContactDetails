@@ -5,11 +5,17 @@ const isValidEmail = function (value) {
 };
 
 function checkPHnumber(str) {
-    var re = /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/;
+    var re = /^[6-9]\d{9}$/;
     return re.test(str);
+}
+
+function isValidPassword(pass){
+    var reg = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/;
+    return reg.test(pass)
 }
 
 
 
 module.exports.isValidEmail = isValidEmail;
 module.exports.checkPHnumber = checkPHnumber;
+module.exports.isValidPassword = isValidPassword

@@ -13,7 +13,7 @@ exports.createContact = async  (req, res) => {
     if (!name || !email || !phone) {
       return res
         .status(400)
-        .send({ status: false, Error: "user's all data is mandatory" });
+        .send({ status: false, Error: "user's all data is mandatory"});
     }
 
     // email syntax validation
@@ -22,7 +22,18 @@ exports.createContact = async  (req, res) => {
         .status(400)
         .send({
           status: false,
-          Error: "INVALID EMAIL - Email should be in this format (abc@egf.com)",
+          Error: "INVALID EMAIL - Email should be in this format (abc@gmail.com)",
+        });
+    }
+
+    // phone number syntax validation 
+
+    if (!validation.checkPHnumber(phone)) {
+      return res
+        .status(400)
+        .send({
+          status: false,
+          Error: "Invalid mobile number - Should be a 10-digit number starting with a digit from 6 to 9.",
         });
     }
 
