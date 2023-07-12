@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const contactSchema = new mongoose.Schema(
   {
+
+    collge : {
+      type: String,
+    },
     name: {
       type: String,
       required: true,

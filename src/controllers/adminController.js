@@ -47,7 +47,6 @@ exports.createAdmin = async (req,res) =>{
       }
     };
     
-
 exports.getContactDetails  = async (req,res) => {
    try {
     let data = req.body
